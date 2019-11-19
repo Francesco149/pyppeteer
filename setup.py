@@ -60,6 +60,7 @@ setup(
     description=('Headless chrome/chromium automation library '
                  '(unofficial port of puppeteer)'),
     long_description=readme,
+    long_description_content_type='text/markdown',
 
     author="Hiroyuki Takagi",
     author_email='miyako.dev@gmail.com',
