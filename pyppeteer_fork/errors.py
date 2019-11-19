@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-"""Exceptions for pyppeteer package."""
+"""Exceptions for pyppeteer_fork package."""
 
 import asyncio
 
 
 class PyppeteerError(Exception):  # noqa: D204
-    """Base exception for pyppeteer."""
+    """Base exception for pyppeteer_fork."""
     pass
 
 

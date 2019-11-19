@@ -10,10 +10,10 @@ from typing import Any, Awaitable, Callable, Dict, List, Optional
 
 from pyee import EventEmitter
 
-from pyppeteer.connection import Connection
-from pyppeteer.errors import BrowserError
-from pyppeteer.page import Page
-from pyppeteer.target import Target
+from pyppeteer_fork.connection import Connection
+from pyppeteer_fork.errors import BrowserError
+from pyppeteer_fork.page import Page
+from pyppeteer_fork.target import Target
 
 logger = logging.getLogger(__name__)
 
@@ -21,9 +21,9 @@ logger = logging.getLogger(__name__)
 class Browser(EventEmitter):
     """Browser class.
 
-    A Browser object is created when pyppeteer connects to chrome, either
-    through :func:`~pyppeteer.launcher.launch` or
-    :func:`~pyppeteer.launcher.connect`.
+    A Browser object is created when pyppeteer_fork connects to chrome, either
+    through :func:`~pyppeteer_fork.launcher.launch` or
+    :func:`~pyppeteer_fork.launcher.connect`.
     """
 
     Events = SimpleNamespace(
@@ -82,7 +82,7 @@ class Browser(EventEmitter):
     def process(self) -> Optional[Popen]:
         """Return process of this browser.
 
-        If browser instance is created by :func:`pyppeteer.launcher.connect`,
+        If browser instance is created by :func:`pyppeteer_fork.launcher.connect`,
         return ``None``.
         """
         return self._process
@@ -231,7 +231,7 @@ class Browser(EventEmitter):
         """Get all pages of this browser.
 
         Non visible pages, such as ``"background_page"``, will not be listed
-        here. You can find then using :meth:`pyppeteer.target.Target.page`.
+        here. You can find then using :meth:`pyppeteer_fork.target.Target.page`.
 
         In case of multiple browser contexts, this method will return a list
         with all the pages in all browser contexts.
@@ -252,7 +252,7 @@ class Browser(EventEmitter):
 
         .. note::
             Pages can override browser user agent with
-            :meth:`pyppeteer.page.Page.setUserAgent`.
+            :meth:`pyppeteer_fork.page.Page.setUserAgent`.
         """
         version = await self._getVersion()
         return version.get('userAgent', '')
@@ -318,7 +318,7 @@ class BrowserContext(EventEmitter):
         """Return list of all open pages.
 
         Non-visible pages, such as ``"background_page"``, will not be listed
-        here. You can find them using :meth:`pyppeteer.target.Target.page`.
+        here. You can find them using :meth:`pyppeteer_fork.target.Target.page`.
         """
         # Using asyncio.gather is better for performance
         pages = []

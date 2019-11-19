@@ -8,18 +8,18 @@ import math
 import re
 from typing import Any, Dict, Optional, TYPE_CHECKING
 
-from pyppeteer import helper
-from pyppeteer.connection import CDPSession
-from pyppeteer.errors import ElementHandleError, NetworkError
-from pyppeteer.helper import debugError
+from pyppeteer_fork import helper
+from pyppeteer_fork.connection import CDPSession
+from pyppeteer_fork.errors import ElementHandleError, NetworkError
+from pyppeteer_fork.helper import debugError
 
 if TYPE_CHECKING:
-    from pyppeteer.element_handle import ElementHandle  # noqa: F401
-    from pyppeteer.frame_manager import Frame  # noqa: F401
+    from pyppeteer_fork.element_handle import ElementHandle  # noqa: F401
+    from pyppeteer_fork.frame_manager import Frame  # noqa: F401
 
 logger = logging.getLogger(__name__)
 
-EVALUATION_SCRIPT_URL = '__pyppeteer_evaluation_script__'
+EVALUATION_SCRIPT_URL = '__pyppeteer_fork_evaluation_script__'
 SOURCE_URL_REGEX = re.compile(
     r'^[\040\t]*//[@#] sourceURL=\s*(\S*?)\s*$',
     re.MULTILINE,
@@ -48,7 +48,7 @@ class ExecutionContext(object):
                        force_expr: bool = False) -> Any:
         """Execute ``pageFunction`` on this context.
 
-        Details see :meth:`pyppeteer.page.Page.evaluate`.
+        Details see :meth:`pyppeteer_fork.page.Page.evaluate`.
         """
         handle = await self.evaluateHandle(
             pageFunction, *args, force_expr=force_expr)
@@ -67,7 +67,7 @@ class ExecutionContext(object):
                              force_expr: bool = False) -> 'JSHandle':
         """Execute ``pageFunction`` on this context.
 
-        Details see :meth:`pyppeteer.page.Page.evaluateHandle`.
+        Details see :meth:`pyppeteer_fork.page.Page.evaluateHandle`.
         """
         suffix = f'//# sourceURL={EVALUATION_SCRIPT_URL}'
 
@@ -135,7 +135,7 @@ class ExecutionContext(object):
     async def queryObjects(self, prototypeHandle: 'JSHandle') -> 'JSHandle':
         """Send query.
 
-        Details see :meth:`pyppeteer.page.Page.queryObjects`.
+        Details see :meth:`pyppeteer_fork.page.Page.queryObjects`.
         """
         if prototypeHandle._disposed:
             raise ElementHandleError('Prototype JSHandle is disposed!')
@@ -152,7 +152,7 @@ class JSHandle(object):
     """JSHandle class.
 
     JSHandle represents an in-page JavaScript object. JSHandle can be created
-    with the :meth:`~pyppeteer.page.Page.evaluateHandle` method.
+    with the :meth:`~pyppeteer_fork.page.Page.evaluateHandle` method.
     """
 
     def __init__(self, context: ExecutionContext, client: CDPSession,

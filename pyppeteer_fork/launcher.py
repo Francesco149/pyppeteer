@@ -21,23 +21,23 @@ import tempfile
 import time
 from typing import Any, Dict, List, TYPE_CHECKING
 
-from pyppeteer import __pyppeteer_home__
-from pyppeteer.browser import Browser
-from pyppeteer.connection import Connection
-from pyppeteer.chromium_downloader import current_platform
-from pyppeteer.errors import BrowserError
-from pyppeteer.helper import addEventListener, debugError, removeEventListeners
-from pyppeteer.target import Target
-from pyppeteer.util import check_chromium, chromium_executable
-from pyppeteer.util import download_chromium, merge_dict, get_free_port
+from pyppeteer_fork import __pyppeteer_fork_home__
+from pyppeteer_fork.browser import Browser
+from pyppeteer_fork.connection import Connection
+from pyppeteer_fork.chromium_downloader import current_platform
+from pyppeteer_fork.errors import BrowserError
+from pyppeteer_fork.helper import addEventListener, debugError, removeEventListeners
+from pyppeteer_fork.target import Target
+from pyppeteer_fork.util import check_chromium, chromium_executable
+from pyppeteer_fork.util import download_chromium, merge_dict, get_free_port
 
 if TYPE_CHECKING:
     from typing import Optional  # noqa: F401
 
 logger = logging.getLogger(__name__)
 
-pyppeteer_home = Path(__pyppeteer_home__)
-CHROME_PROFILE_PATH = pyppeteer_home / '.dev_profile'
+pyppeteer_fork_home = Path(__pyppeteer_fork_home__)
+CHROME_PROFILE_PATH = pyppeteer_fork_home / '.dev_profile'
 
 DEFAULT_ARGS = [
     '--disable-background-networking',
@@ -92,7 +92,7 @@ class Launcher(object):
 
         logLevel = options.get('logLevel')
         if logLevel:
-            logging.getLogger('pyppeteer').setLevel(logLevel)
+            logging.getLogger('pyppeteer_fork').setLevel(logLevel)
 
         self.chromeArguments: List[str] = list()
         if not ignoreDefaultArgs:
@@ -249,7 +249,7 @@ class Launcher(object):
 
 
 async def launch(options: dict = None, **kwargs: Any) -> Browser:
-    """Start chrome process and return :class:`~pyppeteer.browser.Browser`.
+    """Start chrome process and return :class:`~pyppeteer_fork.browser.Browser`.
 
     This function is a shortcut to :meth:`Launcher(options, **kwargs).launch`.
 
@@ -261,7 +261,7 @@ async def launch(options: dict = None, **kwargs: Any) -> Browser:
       ``True`` unless ``appMode`` or ``devtools`` options is ``True``.
     * ``executablePath`` (str): Path to a Chromium or Chrome executable to run
       instead of default bundled Chromium.
-    * ``slowMo`` (int|float): Slow down pyppeteer operations by the specified
+    * ``slowMo`` (int|float): Slow down pyppeteer_fork operations by the specified
       amount of milliseconds.
     * ``defaultViewport`` (dict): Set a consistent viewport for each page.
       Defaults to an 800x600 viewport. ``None`` disables default viewport.
@@ -280,7 +280,7 @@ async def launch(options: dict = None, **kwargs: Any) -> Browser:
     * ``args`` (List[str]): Additional arguments (flags) to pass to the browser
       process.
     * ``ignoreDefaultArgs`` (bool or List[str]): If ``True``, do not use
-      :func:`~pyppeteer.defaultArgs`. If list is given, then filter out given
+      :func:`~pyppeteer_fork.defaultArgs`. If list is given, then filter out given
       default arguments. Dangerous option; use with care. Defaults to
       ``False``.
     * ``handleSIGINT`` (bool): Close the browser process on Ctrl+C. Defaults to
@@ -307,10 +307,10 @@ async def launch(options: dict = None, **kwargs: Any) -> Browser:
     This function combines 3 steps:
 
     1. Infer a set of flags to launch chromium with using
-       :func:`~pyppeteer.defaultArgs`.
+       :func:`~pyppeteer_fork.defaultArgs`.
     2. Launch browser and start managing its process according to the
        ``executablePath``, ``handleSIGINT``, ``dumpio``, and other options.
-    3. Create an instance of :class:`~pyppeteer.browser.Browser` class and
+    3. Create an instance of :class:`~pyppeteer_fork.browser.Browser` class and
        initialize it with ``defaultViewport``, ``slowMo``, and
        ``ignoreHTTPSErrors``.
 
@@ -335,7 +335,7 @@ async def connect(options: dict = None, **kwargs: Any) -> Browser:
 
     ``browserWSEndpoint`` option is necessary to connect to the chrome. The
     format is ``ws://${host}:${port}/devtools/browser/<id>``. This value can
-    get by :attr:`~pyppeteer.browser.Browser.wsEndpoint`.
+    get by :attr:`~pyppeteer_fork.browser.Browser.wsEndpoint`.
 
     Available options are:
 
@@ -357,7 +357,7 @@ async def connect(options: dict = None, **kwargs: Any) -> Browser:
       * ``isLandscape`` (bool): Specify if viewport is in landscape mode.
         Defaults to ``False``.
 
-    * ``slowMo`` (int|float): Slow down pyppeteer's by the specified amount of
+    * ``slowMo`` (int|float): Slow down pyppeteer_fork's by the specified amount of
       milliseconds.
     * ``logLevel`` (int|str): Log level to print logs. Defaults to same as the
       root logger.
@@ -366,7 +366,7 @@ async def connect(options: dict = None, **kwargs: Any) -> Browser:
     options = merge_dict(options, kwargs)
     logLevel = options.get('logLevel')
     if logLevel:
-        logging.getLogger('pyppeteer').setLevel(logLevel)
+        logging.getLogger('pyppeteer_fork').setLevel(logLevel)
 
     browserWSEndpoint = options.get('browserWSEndpoint')
     if not browserWSEndpoint:

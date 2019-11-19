@@ -9,14 +9,14 @@ import math
 import os.path
 from typing import Any, Dict, List, Optional, TYPE_CHECKING
 
-from pyppeteer.connection import CDPSession
-from pyppeteer.execution_context import ExecutionContext, JSHandle
-from pyppeteer.errors import ElementHandleError, NetworkError
-from pyppeteer.helper import debugError
-from pyppeteer.util import merge_dict
+from pyppeteer_fork.connection import CDPSession
+from pyppeteer_fork.execution_context import ExecutionContext, JSHandle
+from pyppeteer_fork.errors import ElementHandleError, NetworkError
+from pyppeteer_fork.helper import debugError
+from pyppeteer_fork.util import merge_dict
 
 if TYPE_CHECKING:
-    from pyppeteer.frame_manager import Frame, FrameManager  # noqa: F401
+    from pyppeteer_fork.frame_manager import Frame, FrameManager  # noqa: F401
 
 
 logger = logging.getLogger(__name__)
@@ -26,15 +26,15 @@ class ElementHandle(JSHandle):
     """ElementHandle class.
 
     This class represents an in-page DOM element. ElementHandle can be created
-    by the :meth:`pyppeteer.page.Page.querySelector` method.
+    by the :meth:`pyppeteer_fork.page.Page.querySelector` method.
 
     ElementHandle prevents DOM element from garbage collection unless the
     handle is disposed. ElementHandles are automatically disposed when their
     origin frame gets navigated.
 
     ElementHandle isinstance can be used as arguments in
-    :meth:`pyppeteer.page.Page.querySelectorEval` and
-    :meth:`pyppeteer.page.Page.evaluate` methods.
+    :meth:`pyppeteer_fork.page.Page.querySelectorEval` and
+    :meth:`pyppeteer_fork.page.Page.evaluate` methods.
     """
 
     def __init__(self, context: ExecutionContext, client: CDPSession,
@@ -210,7 +210,7 @@ class ElementHandle(JSHandle):
                    ) -> None:
         """Focus the element and then type text.
 
-        Details see :meth:`pyppeteer.input.Keyboard.type` method.
+        Details see :meth:`pyppeteer_fork.input.Keyboard.type` method.
         """
         options = merge_dict(options, kwargs)
         await self.focus()
@@ -221,8 +221,8 @@ class ElementHandle(JSHandle):
         """Press ``key`` onto the element.
 
         This method focuses the element, and then uses
-        :meth:`pyppeteer.input.keyboard.down` and
-        :meth:`pyppeteer.input.keyboard.up`.
+        :meth:`pyppeteer_fork.input.keyboard.down` and
+        :meth:`pyppeteer_fork.input.keyboard.up`.
 
         :arg str key: Name of key to press, such as ``ArrowLeft``.
 
@@ -298,7 +298,7 @@ class ElementHandle(JSHandle):
         If the element is detached from DOM, this method raises an
         ``ElementHandleError``.
 
-        Available options are same as :meth:`pyppeteer.page.Page.screenshot`.
+        Available options are same as :meth:`pyppeteer_fork.page.Page.screenshot`.
         """
         options = merge_dict(options, kwargs)
 

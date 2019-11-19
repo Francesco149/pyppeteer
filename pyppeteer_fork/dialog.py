@@ -5,7 +5,7 @@
 
 from types import SimpleNamespace
 
-from pyppeteer.connection import CDPSession
+from pyppeteer_fork.connection import CDPSession
 
 
 class Dialog(object):

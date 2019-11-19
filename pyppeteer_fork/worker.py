@@ -8,11 +8,11 @@ from typing import Any, Callable, Dict, List, TYPE_CHECKING
 
 from pyee import EventEmitter
 
-from pyppeteer.execution_context import ExecutionContext, JSHandle
-from pyppeteer.helper import debugError
+from pyppeteer_fork.execution_context import ExecutionContext, JSHandle
+from pyppeteer_fork.helper import debugError
 
 if TYPE_CHECKING:
-    from pyppeteer.connection import CDPSession  # noqa: F401
+    from pyppeteer_fork.connection import CDPSession  # noqa: F401
 
 logger = logging.getLogger(__name__)
 
@@ -93,7 +93,7 @@ class Worker(EventEmitter):
             pageFunction, *args)
 
     async def evaluateHandle(self, pageFunction: str, *args: Any) -> JSHandle:
-        """Evaluate ``pageFunction`` with ``args`` and return :class:`~pyppeteer.execution_context.JSHandle`.
+        """Evaluate ``pageFunction`` with ``args`` and return :class:`~pyppeteer_fork.execution_context.JSHandle`.
 
         Shortcut for ``(await worker.executionContext).evaluateHandle(pageFunction, *args)``.
         """  # noqa: E501

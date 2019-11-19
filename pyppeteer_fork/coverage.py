@@ -7,12 +7,12 @@ from functools import cmp_to_key
 import logging
 from typing import Any, Dict, List
 
-from pyppeteer import helper
-from pyppeteer.connection import CDPSession
-from pyppeteer.errors import PageError
-from pyppeteer.execution_context import EVALUATION_SCRIPT_URL
-from pyppeteer.helper import debugError
-from pyppeteer.util import merge_dict
+from pyppeteer_fork import helper
+from pyppeteer_fork.connection import CDPSession
+from pyppeteer_fork.errors import PageError
+from pyppeteer_fork.execution_context import EVALUATION_SCRIPT_URL
+from pyppeteer_fork.helper import debugError
+from pyppeteer_fork.util import merge_dict
 
 logger = logging.getLogger(__name__)
 
@@ -66,7 +66,7 @@ class Coverage(object):
             are scripts that are dynamically created on the page using ``eval``
             of ``new Function``. If ``reportAnonymousScript`` is set to
             ``True``, anonymous scripts will have
-            ``__pyppeteer_evaluation_script__`` as their url.
+            ``__pyppeteer_fork_evaluation_script__`` as their url.
         """
         options = merge_dict(options, kwargs)
         await self._jsCoverage.start(options)
@@ -167,7 +167,7 @@ class JSCoverage(object):
         self._scriptSources.clear()
 
     async def _onScriptParsed(self, event: Dict) -> None:
-        # Ignore pyppeteer-injected scripts
+        # Ignore pyppeteer_fork-injected scripts
         if event.get('url') == EVALUATION_SCRIPT_URL:
             return
         # Ignore other anonymous scripts unless the reportAnonymousScript

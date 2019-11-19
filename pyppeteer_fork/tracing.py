@@ -6,8 +6,8 @@
 from pathlib import Path
 from typing import Any
 
-from pyppeteer.connection import CDPSession
-from pyppeteer.util import merge_dict
+from pyppeteer_fork.connection import CDPSession
+from pyppeteer_fork.util import merge_dict
 
 
 class Tracing(object):

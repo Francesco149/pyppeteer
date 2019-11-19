@@ -9,10 +9,10 @@ basedir = path.dirname(path.abspath(__file__))
 extra_args = {}
 
 if (3, 6) > sys.version_info >= (3, 5):
-    in_dir = path.join(basedir, 'pyppeteer')
-    out_dir = path.join(basedir, '.pyppeteer')
-    packages = ['pyppeteer']
-    package_dir = {'pyppeteer': '.pyppeteer'}
+    in_dir = path.join(basedir, 'pyppeteer_fork')
+    out_dir = path.join(basedir, '.pyppeteer_fork')
+    packages = ['pyppeteer_fork']
+    package_dir = {'pyppeteer_fork': '.pyppeteer_fork'}
     if not path.exists(out_dir):
         if path.exists(in_dir):
             try:
@@ -28,8 +28,8 @@ if (3, 6) > sys.version_info >= (3, 5):
         else:
             raise Exception('Could not find package directory')
 else:
-    packages = ['pyppeteer']
-    package_dir = {'pyppeteer': 'pyppeteer'}
+    packages = ['pyppeteer_fork']
+    package_dir = {'pyppeteer_fork': 'pyppeteer_fork'}
 
 readme_file = path.join(basedir, 'README.md')
 with open(readme_file) as f:
@@ -55,7 +55,7 @@ test_requirements = [
 ]
 
 setup(
-    name='pyppeteer',
+    name='pyppeteer_fork',
     version='0.0.26',
     description=('Headless chrome/chromium automation library '
                  '(unofficial port of puppeteer)'),
@@ -63,7 +63,7 @@ setup(
 
     author="Hiroyuki Takagi",
     author_email='miyako.dev@gmail.com',
-    url='https://github.com/miyakogi/pyppeteer',
+    url='https://github.com/miyakogi/pyppeteer_fork',
 
     packages=packages,
     package_dir=package_dir,
@@ -71,13 +71,13 @@ setup(
     install_requires=requirements,
     entry_points={
         'console_scripts': [
-            'pyppeteer-install = pyppeteer.command:install',
+            'pyppeteer_fork-install = pyppeteer_fork.command:install',
         ],
     },
 
     license="MIT license",
     zip_safe=False,
-    keywords='pyppeteer',
+    keywords='pyppeteer_fork',
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',

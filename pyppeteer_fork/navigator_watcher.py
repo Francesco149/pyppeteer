@@ -7,10 +7,10 @@ import asyncio
 import concurrent.futures
 from typing import Any, Awaitable, Dict, List, Union
 
-from pyppeteer import helper
-from pyppeteer.errors import TimeoutError
-from pyppeteer.frame_manager import FrameManager, Frame
-from pyppeteer.util import merge_dict
+from pyppeteer_fork import helper
+from pyppeteer_fork.errors import TimeoutError
+from pyppeteer_fork.frame_manager import FrameManager, Frame
+from pyppeteer_fork.util import merge_dict
 
 
 class NavigatorWatcher:
@@ -81,7 +81,7 @@ class NavigatorWatcher:
             )
         self._expectedLifecycle: List[str] = []
         for value in waitUntil:
-            protocolEvent = pyppeteerToProtocolLifecycle.get(value)
+            protocolEvent = pyppeteer_forkToProtocolLifecycle.get(value)
             if protocolEvent is None:
                 raise ValueError(
                     f'Unknown value for options.waitUntil: {value}')
@@ -142,7 +142,7 @@ class NavigatorWatcher:
         self._timeout_timer.cancel()
 
 
-pyppeteerToProtocolLifecycle = {
+pyppeteer_forkToProtocolLifecycle = {
     'load': 'load',
     'domcontentloaded': 'DOMContentLoaded',
     'documentloaded': 'DOMContentLoaded',

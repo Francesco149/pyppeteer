@@ -7,11 +7,11 @@ import asyncio
 from typing import Any, Callable, Coroutine, Dict, List, Optional
 from typing import TYPE_CHECKING
 
-from pyppeteer.connection import CDPSession
-from pyppeteer.page import Page
+from pyppeteer_fork.connection import CDPSession
+from pyppeteer_fork.page import Page
 
 if TYPE_CHECKING:
-    from pyppeteer.browser import Browser, BrowserContext  # noqa: F401
+    from pyppeteer_fork.browser import Browser, BrowserContext  # noqa: F401
 
 
 class Target(object):

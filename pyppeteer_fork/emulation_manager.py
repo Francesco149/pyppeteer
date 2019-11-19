@@ -3,8 +3,8 @@
 
 """Emulation Manager module."""
 
-from pyppeteer import helper
-from pyppeteer.connection import CDPSession
+from pyppeteer_fork import helper
+from pyppeteer_fork.connection import CDPSession
 
 
 class EmulationManager(object):

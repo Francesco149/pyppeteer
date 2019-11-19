@@ -15,26 +15,26 @@ from typing import TYPE_CHECKING
 
 from pyee import EventEmitter
 
-from pyppeteer import helper
-from pyppeteer.connection import CDPSession
-from pyppeteer.coverage import Coverage
-from pyppeteer.dialog import Dialog
-from pyppeteer.element_handle import ElementHandle
-from pyppeteer.emulation_manager import EmulationManager
-from pyppeteer.errors import PageError
-from pyppeteer.execution_context import JSHandle  # noqa: F401
-from pyppeteer.frame_manager import Frame  # noqa: F401
-from pyppeteer.frame_manager import FrameManager
-from pyppeteer.helper import debugError
-from pyppeteer.input import Keyboard, Mouse, Touchscreen
-from pyppeteer.navigator_watcher import NavigatorWatcher
-from pyppeteer.network_manager import NetworkManager, Response, Request
-from pyppeteer.tracing import Tracing
-from pyppeteer.util import merge_dict
-from pyppeteer.worker import Worker
+from pyppeteer_fork import helper
+from pyppeteer_fork.connection import CDPSession
+from pyppeteer_fork.coverage import Coverage
+from pyppeteer_fork.dialog import Dialog
+from pyppeteer_fork.element_handle import ElementHandle
+from pyppeteer_fork.emulation_manager import EmulationManager
+from pyppeteer_fork.errors import PageError
+from pyppeteer_fork.execution_context import JSHandle  # noqa: F401
+from pyppeteer_fork.frame_manager import Frame  # noqa: F401
+from pyppeteer_fork.frame_manager import FrameManager
+from pyppeteer_fork.helper import debugError
+from pyppeteer_fork.input import Keyboard, Mouse, Touchscreen
+from pyppeteer_fork.navigator_watcher import NavigatorWatcher
+from pyppeteer_fork.network_manager import NetworkManager, Response, Request
+from pyppeteer_fork.tracing import Tracing
+from pyppeteer_fork.util import merge_dict
+from pyppeteer_fork.worker import Worker
 
 if TYPE_CHECKING:
-    from pyppeteer.browser import Browser, Target  # noqa: F401
+    from pyppeteer_fork.browser import Browser, Target  # noqa: F401
 
 logger = logging.getLogger(__name__)
 
@@ -43,7 +43,7 @@ class Page(EventEmitter):
     """Page class.
 
     This class provides methods to interact with a single tab of chrome. One
-    :class:`~pyppeteer.browser.Browser` object might have multiple Page object.
+    :class:`~pyppeteer_fork.browser.Browser` object might have multiple Page object.
 
     The :class:`Page` class emits various :attr:`~Page.Events` which can be
     handled by using ``on`` or ``once`` method, which is inherited from
@@ -243,22 +243,22 @@ class Page(EventEmitter):
 
     @property
     def mainFrame(self) -> Optional['Frame']:
-        """Get main :class:`~pyppeteer.frame_manager.Frame` of this page."""
+        """Get main :class:`~pyppeteer_fork.frame_manager.Frame` of this page."""
         return self._frameManager._mainFrame
 
     @property
     def keyboard(self) -> Keyboard:
-        """Get :class:`~pyppeteer.input.Keyboard` object."""
+        """Get :class:`~pyppeteer_fork.input.Keyboard` object."""
         return self._keyboard
 
     @property
     def touchscreen(self) -> Touchscreen:
-        """Get :class:`~pyppeteer.input.Touchscreen` object."""
+        """Get :class:`~pyppeteer_fork.input.Touchscreen` object."""
         return self._touchscreen
 
     @property
     def coverage(self) -> Coverage:
-        """Return :class:`~pyppeteer.coverage.Coverage`."""
+        """Return :class:`~pyppeteer_fork.coverage.Coverage`."""
         return self._coverage
 
     async def tap(self, selector: str) -> None:
@@ -290,10 +290,10 @@ class Page(EventEmitter):
         """Enable/disable request interception.
 
         Activating request interception enables
-        :class:`~pyppeteer.network_manager.Request` class's
-        :meth:`~pyppeteer.network_manager.Request.abort`,
-        :meth:`~pyppeteer.network_manager.Request.continue_`, and
-        :meth:`~pyppeteer.network_manager.Request.response` methods.
+        :class:`~pyppeteer_fork.network_manager.Request` class's
+        :meth:`~pyppeteer_fork.network_manager.Request.abort`,
+        :meth:`~pyppeteer_fork.network_manager.Request.continue_`, and
+        :meth:`~pyppeteer_fork.network_manager.Request.response` methods.
         This provides the capability to modify network requests that are made
         by a page.
 
@@ -364,7 +364,7 @@ class Page(EventEmitter):
         :arg str selector: A selector to search element.
         :return Optional[ElementHandle]: If element which matches the
             ``selector`` is found, return its
-            :class:`~pyppeteer.element_handle.ElementHandle`. If not found,
+            :class:`~pyppeteer_fork.element_handle.ElementHandle`. If not found,
             returns ``None``.
         """
         frame = self.mainFrame
@@ -376,8 +376,8 @@ class Page(EventEmitter):
                              ) -> JSHandle:
         """Execute function on this page.
 
-        Difference between :meth:`~pyppeteer.page.Page.evaluate` and
-        :meth:`~pyppeteer.page.Page.evaluateHandle` is that
+        Difference between :meth:`~pyppeteer_fork.page.Page.evaluate` and
+        :meth:`~pyppeteer_fork.page.Page.evaluateHandle` is that
         ``evaluateHandle`` returns JSHandle object (not value).
 
         :arg str pageFunction: JavaScript function to be executed.
@@ -438,7 +438,7 @@ class Page(EventEmitter):
 
         :arg str selector: A selector to search element.
         :return List[ElementHandle]: List of
-            :class:`~pyppeteer.element_handle.ElementHandle` which matches the
+            :class:`~pyppeteer_fork.element_handle.ElementHandle` which matches the
             ``selector``. If no element is matched to the ``selector``, return
             empty list.
         """
@@ -561,7 +561,7 @@ class Page(EventEmitter):
             * ``type`` (string): Script type. Use ``module`` in order to load a
               JavaScript ES6 module.
 
-        :return ElementHandle: :class:`~pyppeteer.element_handle.ElementHandle`
+        :return ElementHandle: :class:`~pyppeteer_fork.element_handle.ElementHandle`
                                of added tag.
         """
         frame = self.mainFrame
@@ -579,7 +579,7 @@ class Page(EventEmitter):
             * ``path`` (string): Path to the local CSS file to add.
             * ``content`` (string): CSS string to add.
 
-        :return ElementHandle: :class:`~pyppeteer.element_handle.ElementHandle`
+        :return ElementHandle: :class:`~pyppeteer_fork.element_handle.ElementHandle`
                                of added tag.
         """
         frame = self.mainFrame
@@ -599,21 +599,21 @@ class Page(EventEmitter):
         return await frame.injectFile(filePath)
 
     async def exposeFunction(self, name: str,
-                             pyppeteerFunction: Callable[..., Any]
+                             pyppeteer_forkFunction: Callable[..., Any]
                              ) -> None:
         """Add python function to the browser's ``window`` object as ``name``.
 
         Registered function can be called from chrome process.
 
         :arg string name: Name of the function on the window object.
-        :arg Callable pyppeteerFunction: Function which will be called on
+        :arg Callable pyppeteer_forkFunction: Function which will be called on
                                          python process. This function should
                                          not be asynchronous function.
         """
         if self._pageBindings.get(name):
             raise PageError(f'Failed to add page binding with name {name}: '
                             f'window["{name}"] already exists!')
-        self._pageBindings[name] = pyppeteerFunction
+        self._pageBindings[name] = pyppeteer_forkFunction
 
         addPageBinding = '''
 function addPageBinding(bindingName) {
@@ -915,7 +915,7 @@ function addPageBinding(bindingName) {
 
         Available options are same as :meth:`goto` method.
 
-        This returns :class:`~pyppeteer.network_manager.Response` when the page
+        This returns :class:`~pyppeteer_fork.network_manager.Response` when the page
         navigates to a new URL or reloads. It is useful for when you run code
         which will indirectly cause the page to navigate. In case of navigation
         to a different anchor or navigation due to
@@ -1512,7 +1512,7 @@ function addPageBinding(bindingName) {
 
     @property
     def mouse(self) -> Mouse:
-        """Get :class:`~pyppeteer.input.Mouse` object."""
+        """Get :class:`~pyppeteer_fork.input.Mouse` object."""
         return self._mouse
 
     async def click(self, selector: str, options: dict = None, **kwargs: Any
@@ -1583,7 +1583,7 @@ function addPageBinding(bindingName) {
 
         If no element matched the ``selector``, raise ``PageError``.
 
-        Details see :meth:`pyppeteer.input.Keyboard.type`.
+        Details see :meth:`pyppeteer_fork.input.Keyboard.type`.
         """
         frame = self.mainFrame
         if not frame:
@@ -1691,7 +1691,7 @@ function addPageBinding(bindingName) {
         :arg Any args: Arguments to pass to ``pageFunction``.
         :return: Return awaitable object which resolves when the
                  ``pageFunction`` returns a truthy value. It resolves to a
-                 :class:`~pyppeteer.execution_context.JSHandle` of the truthy
+                 :class:`~pyppeteer_fork.execution_context.JSHandle` of the truthy
                  value.
 
         This method accepts the following options:

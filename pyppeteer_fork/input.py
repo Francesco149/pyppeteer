@@ -6,10 +6,10 @@
 import asyncio
 from typing import Any, Dict, TYPE_CHECKING
 
-from pyppeteer.connection import CDPSession
-from pyppeteer.errors import PyppeteerError
-from pyppeteer.us_keyboard_layout import keyDefinitions
-from pyppeteer.util import merge_dict
+from pyppeteer_fork.connection import CDPSession
+from pyppeteer_fork.errors import PyppeteerError
+from pyppeteer_fork.us_keyboard_layout import keyDefinitions
+from pyppeteer_fork.util import merge_dict
 
 if TYPE_CHECKING:
     from typing import Set  # noqa: F401

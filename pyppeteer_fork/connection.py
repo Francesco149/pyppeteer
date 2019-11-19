@@ -11,7 +11,7 @@ from typing import Awaitable, Callable, Dict, Union, TYPE_CHECKING
 from pyee import EventEmitter
 import websockets
 
-from pyppeteer.errors import NetworkError
+from pyppeteer_fork.errors import NetworkError
 
 if TYPE_CHECKING:
     from typing import Optional  # noqa: F401

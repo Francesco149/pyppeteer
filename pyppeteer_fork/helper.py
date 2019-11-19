@@ -11,16 +11,16 @@ from typing import Any, Awaitable, Callable, Dict, List
 
 from pyee import EventEmitter
 
-import pyppeteer
-from pyppeteer.connection import CDPSession
-from pyppeteer.errors import ElementHandleError, TimeoutError
+import pyppeteer_fork
+from pyppeteer_fork.connection import CDPSession
+from pyppeteer_fork.errors import ElementHandleError, TimeoutError
 
 logger = logging.getLogger(__name__)
 
 
 def debugError(_logger: logging.Logger, msg: Any) -> None:
     """Log error messages."""
-    if pyppeteer.DEBUG:
+    if pyppeteer_fork.DEBUG:
         _logger.error(msg)
     else:
         _logger.debug(msg)

@@ -11,13 +11,13 @@ from typing import Any, Awaitable, Dict, Generator, List, Optional, Set, Union
 
 from pyee import EventEmitter
 
-from pyppeteer import helper
-from pyppeteer.connection import CDPSession
-from pyppeteer.element_handle import ElementHandle
-from pyppeteer.errors import NetworkError
-from pyppeteer.execution_context import ExecutionContext, JSHandle
-from pyppeteer.errors import ElementHandleError, PageError, TimeoutError
-from pyppeteer.util import merge_dict
+from pyppeteer_fork import helper
+from pyppeteer_fork.connection import CDPSession
+from pyppeteer_fork.element_handle import ElementHandle
+from pyppeteer_fork.errors import NetworkError
+from pyppeteer_fork.execution_context import ExecutionContext, JSHandle
+from pyppeteer_fork.errors import ElementHandleError, PageError, TimeoutError
+from pyppeteer_fork.util import merge_dict
 
 logger = logging.getLogger(__name__)
 
@@ -235,7 +235,7 @@ class FrameManager(EventEmitter):
 class Frame(object):
     """Frame class.
 
-    Frame objects can be obtained via :attr:`pyppeteer.page.Page.mainFrame`.
+    Frame objects can be obtained via :attr:`pyppeteer_fork.page.Page.mainFrame`.
     """
 
     def __init__(self, client: CDPSession, parentFrame: Optional['Frame'],
@@ -281,7 +281,7 @@ class Frame(object):
     async def executionContext(self) -> Optional[ExecutionContext]:
         """Return execution context of this frame.
 
-        Return :class:`~pyppeteer.execution_context.ExecutionContext`
+        Return :class:`~pyppeteer_fork.execution_context.ExecutionContext`
         associated to this frame.
         """
         return await self._contextPromise
@@ -289,7 +289,7 @@ class Frame(object):
     async def evaluateHandle(self, pageFunction: str, *args: Any) -> JSHandle:
         """Execute function on this frame.
 
-        Details see :meth:`pyppeteer.page.Page.evaluateHandle`.
+        Details see :meth:`pyppeteer_fork.page.Page.evaluateHandle`.
         """
         context = await self.executionContext()
         if context is None:
@@ -300,7 +300,7 @@ class Frame(object):
                        force_expr: bool = False) -> Any:
         """Evaluate pageFunction on this frame.
 
-        Details see :meth:`pyppeteer.page.Page.evaluate`.
+        Details see :meth:`pyppeteer_fork.page.Page.evaluate`.
         """
         context = await self.executionContext()
         if context is None:
@@ -311,7 +311,7 @@ class Frame(object):
     async def querySelector(self, selector: str) -> Optional[ElementHandle]:
         """Get element which matches `selector` string.
 
-        Details see :meth:`pyppeteer.page.Page.querySelector`.
+        Details see :meth:`pyppeteer_fork.page.Page.querySelector`.
         """
         document = await self._document()
         value = await document.querySelector(selector)
@@ -344,7 +344,7 @@ class Frame(object):
                                 *args: Any) -> Any:
         """Execute function on element which matches selector.
 
-        Details see :meth:`pyppeteer.page.Page.querySelectorEval`.
+        Details see :meth:`pyppeteer_fork.page.Page.querySelectorEval`.
         """
         document = await self._document()
         return await document.querySelectorEval(selector, pageFunction, *args)
@@ -353,7 +353,7 @@ class Frame(object):
                                    *args: Any) -> Optional[Dict]:
         """Execute function on all elements which matches selector.
 
-        Details see :meth:`pyppeteer.page.Page.querySelectorAllEval`.
+        Details see :meth:`pyppeteer_fork.page.Page.querySelectorAllEval`.
         """
         document = await self._document()
         value = await document.JJeval(selector, pageFunction, *args)
@@ -362,7 +362,7 @@ class Frame(object):
     async def querySelectorAll(self, selector: str) -> List[ElementHandle]:
         """Get all elements which matches `selector`.
 
-        Details see :meth:`pyppeteer.page.Page.querySelectorAll`.
+        Details see :meth:`pyppeteer_fork.page.Page.querySelectorAll`.
         """
         document = await self._document()
         value = await document.querySelectorAll(selector)
@@ -445,7 +445,7 @@ function(html) {
     async def addScriptTag(self, options: Dict) -> ElementHandle:  # noqa: C901
         """Add script tag to this frame.
 
-        Details see :meth:`pyppeteer.page.Page.addScriptTag`.
+        Details see :meth:`pyppeteer_fork.page.Page.addScriptTag`.
         """
         context = await self.executionContext()
         if context is None:
@@ -514,7 +514,7 @@ function(html) {
     async def addStyleTag(self, options: Dict) -> ElementHandle:
         """Add style tag to this frame.
 
-        Details see :meth:`pyppeteer.page.Page.addStyleTag`.
+        Details see :meth:`pyppeteer_fork.page.Page.addStyleTag`.
         """
         context = await self.executionContext()
         if context is None:
@@ -575,7 +575,7 @@ function(html) {
                     ) -> None:
         """Click element which matches ``selector``.
 
-        Details see :meth:`pyppeteer.page.Page.click`.
+        Details see :meth:`pyppeteer_fork.page.Page.click`.
         """
         options = merge_dict(options, kwargs)
         handle = await self.J(selector)
@@ -587,7 +587,7 @@ function(html) {
     async def focus(self, selector: str) -> None:
         """Focus element which matches ``selector``.
 
-        Details see :meth:`pyppeteer.page.Page.focus`.
+        Details see :meth:`pyppeteer_fork.page.Page.focus`.
         """
         handle = await self.J(selector)
         if not handle:
@@ -598,7 +598,7 @@ function(html) {
     async def hover(self, selector: str) -> None:
         """Mouse hover the element which matches ``selector``.
 
-        Details see :meth:`pyppeteer.page.Page.hover`.
+        Details see :meth:`pyppeteer_fork.page.Page.hover`.
         """
         handle = await self.J(selector)
         if not handle:
@@ -609,7 +609,7 @@ function(html) {
     async def select(self, selector: str, *values: str) -> List[str]:
         """Select options and return selected values.
 
-        Details see :meth:`pyppeteer.page.Page.select`.
+        Details see :meth:`pyppeteer_fork.page.Page.select`.
         """
         for value in values:
             if not isinstance(value, str):
@@ -640,7 +640,7 @@ function(html) {
     async def tap(self, selector: str) -> None:
         """Tap the element which matches the ``selector``.
 
-        Details see :meth:`pyppeteer.page.Page.tap`.
+        Details see :meth:`pyppeteer_fork.page.Page.tap`.
         """
         handle = await self.J(selector)
         if not handle:
@@ -652,7 +652,7 @@ function(html) {
                    **kwargs: Any) -> None:
         """Type ``text`` on the element which matches ``selector``.
 
-        Details see :meth:`pyppeteer.page.Page.type`.
+        Details see :meth:`pyppeteer_fork.page.Page.type`.
         """
         options = merge_dict(options, kwargs)
         handle = await self.querySelector(selector)
@@ -666,7 +666,7 @@ function(html) {
                 ) -> Union[Awaitable, 'WaitTask']:
         """Wait until `selectorOrFunctionOrTimeout`.
 
-        Details see :meth:`pyppeteer.page.Page.waitFor`.
+        Details see :meth:`pyppeteer_fork.page.Page.waitFor`.
         """
         options = merge_dict(options, kwargs)
         if isinstance(selectorOrFunctionOrTimeout, (int, float)):
@@ -692,7 +692,7 @@ function(html) {
                         **kwargs: Any) -> 'WaitTask':
         """Wait until element which matches ``selector`` appears on page.
 
-        Details see :meth:`pyppeteer.page.Page.waitForSelector`.
+        Details see :meth:`pyppeteer_fork.page.Page.waitForSelector`.
         """
         options = merge_dict(options, kwargs)
         return self._waitForSelectorOrXPath(selector, False, options)
@@ -701,7 +701,7 @@ function(html) {
                      **kwargs: Any) -> 'WaitTask':
         """Wait until element which matches ``xpath`` appears on page.
 
-        Details see :meth:`pyppeteer.page.Page.waitForXPath`.
+        Details see :meth:`pyppeteer_fork.page.Page.waitForXPath`.
         """
         options = merge_dict(options, kwargs)
         return self._waitForSelectorOrXPath(xpath, True, options)
@@ -710,7 +710,7 @@ function(html) {
                         *args: Any, **kwargs: Any) -> 'WaitTask':
         """Wait until the function completes.
 
-        Details see :meth:`pyppeteer.page.Page.waitForFunction`.
+        Details see :meth:`pyppeteer_fork.page.Page.waitForFunction`.
         """
         options = merge_dict(options, kwargs)
         timeout = options.get('timeout',  30000)  # msec

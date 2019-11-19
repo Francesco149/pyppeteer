@@ -14,11 +14,11 @@ from zipfile import ZipFile
 import urllib3
 from tqdm import tqdm
 
-from pyppeteer import __chromium_revision__, __pyppeteer_home__
+from pyppeteer_fork import __chromium_revision__, __pyppeteer_fork_home__
 
 logger = logging.getLogger(__name__)
 
-DOWNLOADS_FOLDER = Path(__pyppeteer_home__) / 'local-chromium'
+DOWNLOADS_FOLDER = Path(__pyppeteer_fork_home__) / 'local-chromium'
 DEFAULT_DOWNLOAD_HOST = 'https://storage.googleapis.com'
 DOWNLOAD_HOST = os.environ.get(
     'PYPPETEER_DOWNLOAD_HOST', DEFAULT_DOWNLOAD_HOST)

@@ -1,6 +1,9 @@
 Pyppeteer
 =========
 
+NOTE: this is my own temporary fork that bumps default chrome revision
+and handles newer chrome revisions correctly on windows
+
 [![PyPI](https://img.shields.io/pypi/v/pyppeteer.svg)](https://pypi.python.org/pypi/pyppeteer)
 [![PyPI version](https://img.shields.io/pypi/pyversions/pyppeteer.svg)](https://pypi.python.org/pypi/pyppeteer)
 [![Documentation](https://img.shields.io/badge/docs-latest-brightgreen.svg)](https://miyakogi.github.io/pyppeteer)

@@ -15,11 +15,11 @@ from urllib.parse import unquote
 
 from pyee import EventEmitter
 
-from pyppeteer.connection import CDPSession
-from pyppeteer.errors import NetworkError
-from pyppeteer.frame_manager import FrameManager, Frame
-from pyppeteer.helper import debugError
-from pyppeteer.multimap import Multimap
+from pyppeteer_fork.connection import CDPSession
+from pyppeteer_fork.errors import NetworkError
+from pyppeteer_fork.frame_manager import FrameManager, Frame
+from pyppeteer_fork.helper import debugError
+from pyppeteer_fork.multimap import Multimap
 
 if TYPE_CHECKING:
     from typing import Set  # noqa: F401
@@ -304,7 +304,7 @@ class Request(object):
     """Request class.
 
     Whenever the page sends a request, such as for a network resource, the
-    following events are emitted by pyppeteer's page:
+    following events are emitted by pyppeteer_fork's page:
 
     - ``'request'``: emitted when the request is issued by the page.
     - ``'response'``: emitted when/if the response is received for the request.
@@ -390,7 +390,7 @@ class Request(object):
 
     @property
     def frame(self) -> Optional[Frame]:
-        """Return a matching :class:`~pyppeteer.frame_manager.frame` object.
+        """Return a matching :class:`~pyppeteer_fork.frame_manager.frame` object.
 
         Return ``None`` if navigating to error page.
         """
@@ -431,7 +431,7 @@ class Request(object):
         """Continue request with optional request overrides.
 
         To use this method, request interception should be enabled by
-        :meth:`pyppeteer.page.Page.setRequestInterception`. If request
+        :meth:`pyppeteer_fork.page.Page.setRequestInterception`. If request
         interception is not enabled, raise ``NetworkError``.
 
         ``overrides`` can have the following fields:
@@ -461,7 +461,7 @@ class Request(object):
         """Fulfills request with given response.
 
         To use this, request interception should by enabled by
-        :meth:`pyppeteer.page.Page.setRequestInterception`. Request
+        :meth:`pyppeteer_fork.page.Page.setRequestInterception`. Request
         interception is not enabled, raise ``NetworkError``.
 
         ``response`` is a dictionary which can have the following fields:
@@ -520,7 +520,7 @@ class Request(object):
         """Abort request.
 
         To use this, request interception should be enabled by
-        :meth:`pyppeteer.page.Page.setRequestInterception`.
+        :meth:`pyppeteer_fork.page.Page.setRequestInterception`.
         If request interception is not enabled, raise ``NetworkError``.
 
         ``errorCode`` is an optional error code string. Defaults to ``failed``,
