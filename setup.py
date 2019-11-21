@@ -43,7 +43,7 @@ except ImportError:
 
 requirements = [
     'pyee<6',
-    'websockets',
+    'websockets>=7.0',
     'appdirs',
     'urllib3<1.25',
     'tqdm'
@@ -56,7 +56,7 @@ test_requirements = [
 
 setup(
     name='pyppeteer_fork',
-    version='0.0.27',
+    version='0.0.28',
     description=('Headless chrome/chromium automation library '
                  '(unofficial port of puppeteer)'),
     long_description=readme,
