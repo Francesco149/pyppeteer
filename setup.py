@@ -56,7 +56,7 @@ test_requirements = [
 
 setup(
     name='pyppeteer_fork',
-    version='0.0.26',
+    version='0.0.27',
     description=('Headless chrome/chromium automation library '
                  '(unofficial port of puppeteer)'),
     long_description=readme,
